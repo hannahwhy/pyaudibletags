@@ -1,0 +1,25 @@
+#summary Classes
+
+= Class `aafile` =
+
+== Constructor ==
+
+`class aafile(_filename_)`
+
+_filename_ is either a string containing a fully-qualified filename including extension or an open file object
+
+== Instance Methods ==
+
+=== headers() ===
+
+Returns a dictionary of 5 data items from the very beginning of the file: 
+
+# Filesize: The size the file believes itself to be, in bytes, to detect truncated copies. 
+
+# Magic: The constant 1469084982 which identifies the file as being an Audible file. 
+
+# TOC size: Number of entries in the table of contents, as returned by toc(). 
+
+# Number of content tags: Number of entries in the tag table, as returned by tags(). 
+
+# Magic2: Magic repeated at the end of the table of contents.
