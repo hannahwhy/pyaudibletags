@@ -23,7 +23,7 @@ The markup of text fields is not always the same.
  * The `description` tags may contain html markup such as `<I>...</I>`
  * The `copyright` tag may contain html entities such as `&#169;` 
 
-Books that come in multiple parts have Part 1, Part 2 etc in the individual titles; they may also have a `parent title` tag that gives the book title alone, but this is not always present. 
+Books that come in multiple parts have Part 1, Part 2 etc in the individual titles; they may also have a `parent_title` tag that gives the book title alone, but this is not always present. 
 
 Books that come in multiple parts always have the tag `is_aggregation=collection` and will have a `parent_id` tag in addition to the `title_id` tag. 
 
