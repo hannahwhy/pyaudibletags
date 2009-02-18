@@ -4,15 +4,34 @@
 
 == Constructor ==
 
-`class aafile(_filename_)`
+`class aafile(filename)`
 
 _filename_ is either a string containing a fully-qualified filename including extension or an open file object
 
 == Instance Methods ==
 
+The method you probably want is `tags()`. The other methods return data that is primarily of interest in determining where the source data for `tags()` is located.
+
+=== `tags()` ===
+
+Returns a dictionary of around 30 tags describing the audio content of the file (as opposed to file layout). The exact repertoire of tags varies and is richer with more recently published titles. This means that you cannot rely on a particular tag being present. 
+
+The markup of text fields is not always the same.
+
+ * The tags `author` and `narrator` may return comma-separated lists of names; with compilations the list may be quite long and not really suitable as a folder name
+ * The tags `description`, `short_description`, `long_description` have single quotes sometimes \'escaped\', C-style, and sometimes not
+ * The `description` tags may contain html markup such as `<I>...</I>`
+ * The `copyright` tag may contain html entities such as `&#169;` 
+
+Books that come in multiple parts have Part 1, Part 2 etc in the individual titles; they may also have a `parent title` tag that gives the book title alone, but this is not always present. 
+
+Books that come in multiple parts always have the tag `is_aggregation=collection` and will have a `parent_id` tag in addition to the `title_id` tag. 
+
+The tags `HeaderSeed`, `HeaderKey`, `EncryptedBlocks` and `68ec733412b9` are always present and do not really fit the description of describing the audio content, since they appear to support the checksumming of the header and the encryption of the content, but they exist in the tag table along with and (to a program) indistinguishable from the others.
+
 === `headers()` ===
 
-Returns a dictionary of 5 integers from the first 192 bytes of the file: 
+Returns a dictionary of 5 integers from the first (usually) 192 bytes of the file: 
 
  * `Filesize`: The size the file believes itself to be, in bytes, to detect truncated copies. 
 
@@ -26,37 +45,40 @@ Returns a dictionary of 5 integers from the first 192 bytes of the file:
 
 === `toc()` ===
 
-Returns a dictionary of (usually) 12 integer tuples giving the location of various sections of the file as (offset, length). All of the tuples in the header are returned but the functions of only some are known: these are:
+Returns a dictionary of (usually) 12 integer tuples that make up an offset table giving the location of various sections of the file as (offset, length). All of the tuples in the header are returned but the functions of only some are known: these are:
 
- * `Whole file`: offset (0) and length of entire file.
+ * `Whole file`: offset (0) and length of entire file. (Entry 0 in the file.)
  
- * `Header terminator`: offset and length of the block that terminates the table of contents.
+ * `Header terminator`: offset and length of the block that terminates the table of contents. (Entry 1 in the file.)
 
- * `Content tags`: offset and length of the tag table.
+ * `Content tags`: offset and length of the tag table. (Entry 2 in the file.)
 
- * `Audio`: offset and length of the audio content (not including encryption data and decompression keys).
+ * `Audio`: offset and length of the audio content (not including encryption data and decompression keys). (Entry 10 in the file.)
 
- * `Cover art`: offset and length of the cover art image data.
+ * `Cover art`: offset and length of the cover art image data. (Entry 11 in the file.)
 
-Entries in the table whose function is unknown have the key `Offset n` where n is the identifying number (0-11). These numbers are not necessarily in ascending order, although entries 0-2 always are.
+Entries in the table whose function is unknown have the key `Offset n` where n is the identifying number (other than 0-2 and 10-11). These numbers do not necessarily appear in the file in ascending order, although entries 0-2 always do. The number of tuples in the offset table is given by headers()['TOC size'].
 
-=== rawtoc(formatted=0) ===
+=== `rawtoc(formatted=0)` ===
 
 Returns the same data as `headers()` and `toc()` together but untranslated as (usually) 48 integers and laid out exactly as they appear in the first (usually) 192 bytes of the file. If `formatted` is set to 1 then the result is a multi-line string with the numbers laid out with spaces and line breaks to make them easier to understand.
 
-=== tags() ===
+=== `metadata` ===
 
-Returns a dictionary of around 30 tags describing the audio content of the file (as opposed to file layout). The exact repertoire of tags varies and is richer with more recently published titles. This means that you cannot rely on a particular tag being present. 
+Returns all of the metadata retrieved from the file header in a single dictionary. Dictionary keys have the prefixes `Leader:`, `TOC:` and `Content:`. These prefixes correspond to the methods `headers()`, `toc()` and `tags()` respectively.
 
-The markup of text fields is not always the same.
+= Example =
 
- * The tags `author` and `narrator` may return comma-separated lists of names.
- * The description tags have single quotes that are sometimes \'escaped\', C-style, and sometimes not.
- * The `description` tags may contain html markup such as <I>...</I>
- * The `copyright` tag may contain html entities such as `&#169;` 
-
-Books that come in multiple parts have Part 1, Part 2 etc in the individual titles; they may also have a `parent title` tag that gives the book title alone, but this is not always present. 
-
-Books that come in multiple parts always have the tag `is_aggregation=collection` and will have a `parent_id` tag in addition to the `title_id` tag. 
-
-The tags `HeaderSeed`, `HeaderKey`, `EncryptedBlocks` and `68ec733412b9` are always present and do not really fit the description of describing the audio content, since they appear to support the checksumming of the header and the encryption of the content, but they exist in the tag table along with and (to a program) indistinguishable from the others.
+{{{
+import os.path 
+from pyaudibletags import aafile 
+for root, dirs, files in os.walk(r"F:\My Audiobooks"): 
+    for name in files: 
+        if not name.endswith(".aa"): 
+            continue 
+    fullname = os.path.join(root,name) 
+    aa = aafile(fullname) 
+    print name 
+    for k,v in aa.tags().items(): 
+        print "%-32s%r" % (k, v) 
+}}}
