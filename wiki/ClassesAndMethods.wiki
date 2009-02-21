@@ -48,9 +48,9 @@ Books such as compilations may have more than one author. Many recordings have m
 
  * `country`: indication of the territories in which the audiobook may be sold: `0`=worldwide; _other values not known_
 
- * `pubdate`: publication date as an object of type `datetime.date`
+ * `pubdate`: publication date as an object of type `datetime.date`; a suspiciously large number of dates are 1 January: this is may be a conventional indication that only the year is known; 1 January 1970 is a Unix convention that means "date unknown"
 
- * `pub_date_start`: purpose unknown; mostly absent from the file; in practice, for books, when present in the file, always equal to `pubdate`; if absent from the file, `pubdate` will be returned
+ * `pub_date_start`: purpose unknown; mostly absent from the file; in practice, for books, when present in the file, is apparently always equal to `pubdate`; if absent from the file, `pubdate` will be returned
 
 === Search categories ===
 
