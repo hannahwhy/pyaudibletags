@@ -48,9 +48,9 @@ Books such as compilations may have more than one author. Many recordings have m
 
  * `country`: indication of the territories in which the audiobook may be sold: `0`=worldwide; _other values not known_
 
- * `pubdate`: publication date as an object of type `datetime.date`.
+ * `pubdate`: publication date as an object of type `datetime.date`
 
- * `pub_date_start`: purpose unknown; mostly absent from the file; when present equal to `pubdate`
+ * `pub_date_start`: purpose unknown; mostly absent from the file; in practice, for books, when present in the file, always equal to `pubdate`; if absent from the file, `pubdate` will be returned
 
 === Search categories ===
 
@@ -62,13 +62,13 @@ Books such as compilations may have more than one author. Many recordings have m
 
 === Identifiers ===
 
- * `title_id`: a 3-tuple identifying document type (e.g. "BK" for book), an Audible 4-character code for provider (e.g. "BBCW" for BBC Worldwide); and a catalogue number (with `a`, `b` etc suffixed if the book is in multiple parts)
+ * `title_id`: a 3-tuple identifying document type (e.g. `BK` for book), an Audible 4-character code for provider (e.g. `BBCW` for BBC Worldwide); and a catalogue number (with `a`, `b` etc suffixed if the book is in multiple parts)
 
  * `product_id`: a 4-tuple; first 3 elements as for `title_id`; 4th element same as `codec`
 
- * `parent_id`: for an audiobook in multiple parts, an identifier that ties all the parts together; a 3-tuple as for `title_id` but without the (with `a`, `b` suffix for multiple parts). Not always present in the file; when missing, synthesized from `product_id`.
+ * `parent_id`: for an audiobook in multiple parts, an identifier that ties all the parts together; a 3-tuple as for `title_id` but without the `a`, `b` suffix for multiple parts. Not always present in the file; if absent, a value will be synthesized from `product_id`.
 
- * `aggregation_id`: identical to `parent_id`, except that it is less often physically present in the file; if it is missing, `parent_id` is returned instead.
+ * `aggregation_id`: identical to `parent_id`, except that it is less often physically present in the file; if absent, `parent_id` will be returned
 
 === Purchase information ===
 
@@ -78,7 +78,7 @@ Books such as compilations may have more than one author. Many recordings have m
 
 === Audiobook structure ===
 
- * `is_aggregation`: indicates whether the file is a part of a multipart audiobook: `no`= not a multipart audiobook; `collection`=is a multipart audiobook
+ * `is_aggregation`: indicates whether the file is a part of a multipart audiobook: `no`= not a multipart audiobook; `collection`=is a multipart audiobook; not always present in the file; if absent, `no` will be returned
 
  * `codec`: a code corresponding to the Audible compression types: `acelp16`=Audible type 3; `mp332`=Audible type 4
    
