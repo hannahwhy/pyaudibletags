@@ -36,9 +36,9 @@ All string-valued attributes are returned as Unicode.
 
 Books such as compilations may have more than one author. Many recordings have multiple narrators; and where the author provides an introduction or an afterword the author is also listed as a narrator. For this reason these attributes are always tuples.
 
- * `author`: a tuple of Unicode strings.
+ * `author`: a tuple of Unicode strings; if there are more than 3 authors the final element of the tuple will be `...`
 
- * `narrator`: a tuple of Unicode strings.
+ * `narrator`: a tuple of Unicode strings; if there are more than 3 narrators the final element of the tuple will be `...`
 
 === Provenance and copyright ===
 
