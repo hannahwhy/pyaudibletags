@@ -8,9 +8,83 @@
 
 _filename_ is either a string containing a fully-qualified filename including extension or an open file object
 
+The `aafile` class offers two interfaces: a high-level interface with predictable attributes, and a low-level interface that returns dictionaries presenting what happens to be present in the file. The exact repertoire of tags varies and is richer with more recently published titles. This means that you cannot rely on a particular tag being present in the file.
+
+The attribute interface hides this messy reality from you and returns predictable data, even if this has to be synthesized from other information in the file. For example, many audiobooks come in multiple parts. Some of them have a parent_title tag, which is what one would like to use to make a folder name. But some don't. The attribute interface will construct a parent title from the title of the part, by removing (say) "Part 1" from the end of the part title.
+
+You could of course do this yourself, and if you want to, the low-level interface is available. But the high-level interface allows you to concentrate on what you are doing with the information in the file, without having to write tedious traps for when the expected data isn't there.
+
+== Instance Attributes ==
+
+All string-valued attributes are returned as Unicode.
+
+=== Title and Description ===
+
+ * `title`: Title of the file; for multipart books, will contain a part number.
+
+ * `short_title`: Abbreviated title.
+
+ * `parent_title`: For multipart books, the umbrella title covering all of the parts; for books that come in a single file, the same as `title`.
+
+ * `description`: Publisher's blurb; may stop in mid-sentence
+
+ * `short_description`: Shorter version of `description`; may be identical to it
+
+ * `long_description`: Publisher's blurb; may stop in mid-sentence; may be identical to `description`
+
+=== Author and Narrator ===
+
+Books such as compilations may have more than one author. Many recordings have multiple narrators; and where the author provides an introduction or an afterword the author is also listed as a narrator. For this reason these attributes are always tuples.
+
+ * `author`: a tuple of Unicode strings.
+
+ * `narrator`: a tuple of Unicode strings.
+
+=== Provenance and copyright ===
+
+ * `copyright`: copyright notice as it appears in the file
+
+ * `provider`: publisher of the audiobook
+
+ * `country`: indication of the territories in which the audiobook may be sold: `0`=worldwide; _other values not known_
+
+ * `pubdate`: publication date as an object of type `datetime.date`.
+
+ * `pub_date_start`: purpose unknown; mostly absent from the file; when present equal to `pubdate`
+
+=== Search categories ===
+
+ * `category_search`: a tuple of Audible-defined book categories, for example `('Mystery', 'Detective')` _(not much used; this will mostly return an empty tuple)_
+
+ * `category_subcategory_search`: a tuple of Audible-defined book categories and subcategories, for example `('Fiction', 'Science Fiction')` _(not much used; this will mostly return an empty tuple)_
+
+ * `keywords`: a tuple of Audible-defined book categories; highly variable in content: sometimes indistinguishible from `category` ("Science Fiction"), sometimes lists proper names of characters ("Ender Wiggin", "Amelia Peabody"), sometimes tries to summarize plot ("1700s, passion"); in short of dubious utility
+
+=== Identifiers ===
+
+ * `title_id`: a 3-tuple identifying document type (e.g. "BK" for book), an Audible 4-character code for provider (e.g. "BBCW" for BBC Worldwide); and a catalogue number (with `a`, `b` etc suffixed if the book is in multiple parts)
+
+ * `product_id`: a 4-tuple; first 3 elements as for `title_id`; 4th element same as `codec`
+
+ * `parent_id`: for an audiobook in multiple parts, an identifier that ties all the parts together; a 3-tuple as for `title_id` but without the (with `a`, `b` suffix for multiple parts). Not always present in the file; when missing, synthesized from `product_id`.
+
+ * `aggregation_id`: identical to `parent_id`, except that it is less often physically present in the file; if it is missing, `parent_id` is returned instead.
+
+=== Purchase information ===
+
+ * `user_alias`: username at audible.com that paid for the audiobook
+
+ * `price`: a float representing the price paid for the audiobook; 0.0 if missing
+
+=== Audiobook structure ===
+
+ * `is_aggregation`: indicates whether the file is a part of a multipart audiobook: `no`= not a multipart audiobook; `collection`=is a multipart audiobook
+
+ * `codec`: a code corresponding to the Audible compression types: `acelp16`=Audible type 3; `mp332`=Audible type 4
+   
 == Instance Methods ==
 
-The method you probably want is `tags()`. The other methods return data that is primarily of interest in determining where the source data for `tags()` is located.
+Even if you want a low-level interface, the method you probably want is `tags()`. The other methods return data that is primarily of interest in determining where the source data for `tags()` is located.
 
 === `tags()` ===
 
