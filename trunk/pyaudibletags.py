@@ -49,7 +49,7 @@ class aafile():
                  'parent_title', 'keywords', 'long_description', 'copyright', 'title', 'is_aggregation',
                  'parent_id', 'codec', 'provider', 'short_description', 'aggregation_id', 'description',
                  'price', 'product_id', 'pub_date_start', 'country', 'title_id', 'author', 
-                 'category_search' ]
+                 'category_search', 'part_number' ]
 
     def __init__(self, afile):
         self.__toc = ()
@@ -318,6 +318,11 @@ class aafile():
 	else:
 	    return cats
 
+    def get_part_number(self):
+	if self.is_aggregation == u'no':
+	    return 0
+	else:
+	    return int(self.title_id[2][-1],36) - 9
 
     short_title = property(get_short_title, doc="Docstring for attribute short_title")
 
@@ -367,10 +372,12 @@ class aafile():
 
     category_search = property(get_category_search, doc="Docstring for attribute category_search")
     
-#if __name__ == "__main__":
-    #aa = aafile(r"F:\Documents\Audio Books\Bernard Cornwell and Susannah Kells\Unknown Album\A Crowning Mercy (Unabridged), Part 1.aa")
-    #for att in aa.__slots__:
-	#print "%s=%r" % (att, getattr(aa,att))
+    part_number = property(get_part_number, doc="Return an integer in the range 1-27 indicating the part number of a multipart audiobook; zero if there is only one part")
+    
+if __name__ == "__main__":
+    aa = aafile(r"F:\Documents\Audio Books\Bernard Cornwell and Susannah Kells\Unknown Album\A Crowning Mercy (Unabridged), Part 1.aa")
+    for att in aa.__slots__:
+	print "%s=%r" % (att, getattr(aa,att))
     
 
 
