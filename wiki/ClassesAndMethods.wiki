@@ -26,61 +26,61 @@ All string-valued attributes are returned as Unicode.
 
  * `parent_title`: For multipart books, the umbrella title covering all of the parts; for books that come in a single file, the same as `title`.
 
- * `description`: Publisher's blurb; may stop in mid-sentence
+ * `description`: Publisher's blurb; may stop in mid-sentence.
 
- * `short_description`: Shorter version of `description`; may be identical to it
+ * `short_description`: Shorter version of `description`; may be identical to it.
 
- * `long_description`: Publisher's blurb; may stop in mid-sentence; may be identical to `description`
+ * `long_description`: Long version of publisher's blurb; may stop in mid-sentence; may be identical to `description`.
 
 === Author and Narrator ===
 
 Books such as compilations may have more than one author. Many recordings have multiple narrators; and where the author provides an introduction or an afterword the author is also listed as a narrator. For this reason these attributes are always tuples.
 
- * `author`: a tuple of Unicode strings; if there are more than 3 authors the final element of the tuple will be `...`
+ * `author`: a tuple of Unicode strings; if there are more than 3 authors the final element of the tuple may be `...` (representing _and more_ or _with more_ in the physical tag).
 
- * `narrator`: a tuple of Unicode strings; if there are more than 3 narrators the final element of the tuple will be `...`
+ * `narrator`: a tuple of Unicode strings; if there are more than 3 narrators the final element of the tuple may be `...`  (representing _and more_ or _with more_ in the physical tag).
 
-=== Provenance and copyright ===
+=== Provenance and Copyright ===
 
- * `copyright`: copyright notice as it appears in the file
+ * `copyright`: copyright notice as it appears in the file, but with copyright symbols translated where required into the appropriate Unicode codepoints.
 
- * `provider`: publisher of the audiobook
+ * `provider`: publisher of the audiobook.
 
- * `country`: indication of the territories in which the audiobook may be sold: `0`=worldwide; _other values not known_
+ * `country`: indication of the territories in which the audiobook may be sold: `0`=worldwide; _other values not known_.
 
- * `pubdate`: publication date as an object of type `datetime.date`; a suspiciously large number of dates are 1 January: this is may be a conventional indication that only the year is known; 1 January 1970 is a Unix convention that means "date unknown"
+ * `pubdate`: publication date as an object of type `datetime.date`; a suspiciously large number of dates are 1 January: this is may be a conventional indication that only the year is known; 1 January 1970 is a Unix convention that means "date unknown".
 
- * `pub_date_start`: purpose unknown; mostly absent from the file; in practice, for books, when present in the file, is apparently always equal to `pubdate`; if absent from the file, `pubdate` will be returned
+ * `pub_date_start`: purpose unknown; mostly absent from the file; in practice, for books, when present in the file, is apparently always equal to `pubdate`; if absent from the file, `pubdate` will be returned.
 
 === Search categories ===
 
- * `category_search`: a tuple of Audible-defined book categories, for example `('Mystery', 'Detective')` _(not much used; this will mostly return an empty tuple)_
+ * `category_search`: a tuple of Audible-defined book categories, for example `('Mystery', 'Detective')` _(not much used; this will mostly return an empty tuple)_.
 
- * `category_subcategory_search`: a tuple of Audible-defined book categories and subcategories, for example `('Fiction', 'Science Fiction')` _(not much used; this will mostly return an empty tuple)_
+ * `category_subcategory_search`: a tuple of Audible-defined book categories and subcategories, for example `('Fiction', 'Science Fiction')` _(not much used; this will mostly return an empty tuple)_.
 
- * `keywords`: a tuple of Audible-defined book categories; highly variable in content: sometimes indistinguishible from `category` ("Science Fiction"), sometimes lists proper names of characters ("Ender Wiggin", "Amelia Peabody"), sometimes tries to summarize plot ("1700s, passion"); in short of dubious utility
+ * `keywords`: a tuple of (one suspects) publisher-defined book categories; domain is highly variable: sometimes indistinguishible from `category` ("Science Fiction"), sometimes lists proper names of characters ("Ender Wiggin", "Amelia Peabody"), sometimes tries to summarize plot ("1700s, passion"); in short of dubious utility.
 
 === Identifiers ===
 
- * `title_id`: a 3-tuple identifying document type (e.g. `BK` for book), an Audible 4-character code for provider (e.g. `BBCW` for BBC Worldwide); and a catalogue number (with `a`, `b` etc suffixed if the book is in multiple parts)
+ * `title_id`: a 3-tuple identifying document type (e.g. `BK` for book), an Audible 4-character code for provider (e.g. `BBCW` for BBC Worldwide); and a catalogue number (with `a`, `b` etc suffixed if the book is in multiple parts).
 
- * `product_id`: a 4-tuple; first 3 elements as for `title_id`; 4th element same as `codec`
+ * `product_id`: a 4-tuple; first 3 elements as for `title_id`; 4th element same as `codec`.
 
  * `parent_id`: for an audiobook in multiple parts, an identifier that ties all the parts together; a 3-tuple as for `title_id` but without the `a`, `b` suffix for multiple parts. Not always present in the file; if absent, a value will be synthesized from `product_id`.
 
- * `aggregation_id`: identical to `parent_id`, except that it is less often physically present in the file; if absent, `parent_id` will be returned
+ * `aggregation_id`: identical to `parent_id`, except that it is less often physically present in the file; if absent, `parent_id` will be returned.
 
 === Purchase information ===
 
- * `user_alias`: username at audible.com that paid for the audiobook
+ * `user_alias`: username at audible.com that paid for the audiobook.
 
- * `price`: a float representing the price paid for the audiobook; 0.0 if missing
+ * `price`: a float representing the price paid for the audiobook; 0.0 if missing.
 
 === Audiobook structure ===
 
- * `is_aggregation`: indicates whether the file is a part of a multipart audiobook: `no`= not a multipart audiobook; `collection`=is a multipart audiobook; not always present in the file; if absent, `no` will be returned
+ * `is_aggregation`: indicates whether the file is a part of a multipart audiobook: `no`= not a multipart audiobook; `collection`=is a multipart audiobook; not always present in the file; if absent, `no` will be returned.
 
- * `codec`: a code corresponding to the Audible compression types: `acelp16`=Audible type 3; `mp332`=Audible type 4
+ * `codec`: a code corresponding to the Audible compression types: `acelp16`=Audible type 3; `mp332`=Audible type 4.
    
 == Instance Methods ==
 
@@ -96,10 +96,11 @@ The markup of text fields is not always the same.
  * The tags `description`, `short_description`, `long_description` have single quotes sometimes \'escaped\', C-style, and sometimes not
  * The `description` tags may contain html markup such as `<I>...</I>`
  * The `copyright` tag may contain html entities such as `&#169;` 
+ * The `pubdate` and `pub_date_start` fields, when present, may be of the form DD-MMM-YY or DD-MMM-YYYY.
 
 Books that come in multiple parts have Part 1, Part 2 etc in the individual titles; they may also have a `parent_title` tag that gives the book title alone, but this is not always present. 
 
-Books that come in multiple parts always have the tag `is_aggregation=collection` and will have a `parent_id` tag in addition to the `title_id` tag. 
+Books that come in multiple parts always have the tag `is_aggregation=collection` and  have `parent_id` and `aggregation_id` tags in addition to the `title_id` tag. 
 
 The tags `HeaderSeed`, `HeaderKey`, `EncryptedBlocks` and `68ec733412b9` are always present and do not really fit the description of describing the audio content, since they appear to support the checksumming of the header and the encryption of the content, but they exist in the tag table along with and (to a program) indistinguishable from the others.
 
@@ -107,7 +108,7 @@ The tags `HeaderSeed`, `HeaderKey`, `EncryptedBlocks` and `68ec733412b9` are alw
 
 Returns a dictionary of 5 integers from the first (usually) 192 bytes of the file: 
 
- * `Filesize`: The size the file believes itself to be, in bytes, to detect truncated copies. 
+ * `Filesize`: The size the file believes itself to be, in bytes; this is presumably used to detect truncated copies. 
 
  * `Magic`: The constant 1469084982 which identifies the file as being an Audible file. 
 
