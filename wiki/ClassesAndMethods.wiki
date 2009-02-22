@@ -100,7 +100,7 @@ The markup of text fields is not always the same.
 
 Books that come in multiple parts have Part 1, Part 2 etc in the individual titles; they may also have a `parent_title` tag that gives the book title alone, but this is not always present. 
 
-Books that come in multiple parts always have the tag `is_aggregation=collection` and  have `parent_id` and `aggregation_id` tags in addition to the `title_id` tag. 
+Books that come in multiple parts always have the tag `is_aggregation=collection` and  may have `parent_id` and `aggregation_id` tags in addition to the `title_id` tag. 
 
 The tags `HeaderSeed`, `HeaderKey`, `EncryptedBlocks` and `68ec733412b9` are always present and do not really fit the description of describing the audio content, since they appear to support the checksumming of the header and the encryption of the content, but they exist in the tag table along with and (to a program) indistinguishable from the others.
 
@@ -142,7 +142,21 @@ Returns the same data as `headers()` and `toc()` together but untranslated as (u
 
 Returns all of the metadata retrieved from the file header in a single dictionary. Dictionary keys have the prefixes `Leader:`, `TOC:` and `Content:`. These prefixes correspond to the methods `headers()`, `toc()` and `tags()` respectively.
 
-= Example =
+= Example: High-level Interface using attributes =
+
+{{{
+import os.path 
+from pyaudibletags import aafile 
+for root, dirs, files in os.walk(r"F:\My Audiobooks"): 
+    for name in files: 
+        if not name.endswith(".aa"): 
+            continue 
+    fullname = os.path.join(root,name) 
+    aa = aafile(fullname) 
+    print name, aa.author[0], aa.title
+}}}
+
+= Example: Low-level Interface using `tags()` =
 
 {{{
 import os.path 
