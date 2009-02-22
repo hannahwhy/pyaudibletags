@@ -32,6 +32,8 @@ All string-valued attributes are returned as Unicode.
 
  * `long_description`: Long version of publisher's blurb; may stop in mid-sentence; may be identical to `description`.
 
+ * `part_number`: an integer in the range 1-27 indicating the part number of a multipart audiobook; zero if there is only one part.
+
 === Author and Narrator ===
 
 Books such as compilations may have more than one author. Many recordings have multiple narrators; and where the author provides an introduction or an afterword the author is also listed as a narrator. For this reason these attributes are always tuples.
