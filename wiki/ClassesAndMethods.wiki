@@ -8,9 +8,9 @@
 
 _filename_ is either a string containing a fully-qualified filename including extension or an open file object
 
-The `aafile` class offers two interfaces: a high-level interface with predictable attributes, and a low-level interface that returns dictionaries presenting what happens to be present in the file. The exact repertoire of tags varies and is richer with more recently published titles. This means that you cannot rely on a particular tag being present in the file.
+The `aafile` class offers two interfaces: a high-level interface with predictable attributes, and a low-level interface that returns dictionaries presenting what happens to be present in the file. The exact repertoire of physically-present tags varies and is richer with more recently published titles. This means that you cannot rely on a particular tag being present in the file.
 
-The attribute interface hides this messy reality from you and returns predictable data, even if this has to be synthesized from other information in the file. For example, many audiobooks come in multiple parts. Some of them have a parent_title tag, which is what one would like to use to make a folder name. But some don't. The attribute interface will construct a parent title from the title of the part, by removing (say) "Part 1" from the end of the part title.
+The attribute interface hides this messy reality from you and returns predictable data, even if this has to be synthesized from other information in the file. For example, many audiobooks come in multiple parts. Some of them have a `parent_title` tag, which is what one would like to use to make a folder name. But some don't. If you ask for the attribute `parent_title`, but the corresponding tag isn't physically present in the file, the attribute interface will construct a parent title from the title of the part, by removing (say) "Part 1" from the end of the part title.
 
 You could of course do this yourself, and if you want to, the low-level interface is available. But the high-level interface allows you to concentrate on what you are doing with the information in the file, without having to write tedious traps for when the expected data isn't there.
 
