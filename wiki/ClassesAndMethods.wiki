@@ -134,7 +134,7 @@ Returns a dictionary of (usually) 12 integer tuples that make up an offset table
 
  * `Cover art`: offset and length of the cover art image data. (Entry 11 in the file.)
 
-Entries in the table whose function is unknown have the key `Offset n` where n is the identifying number (other than 0-2 and 10-11). These numbers do not necessarily appear in the file in ascending order, although entries 0-2 always do. The number of tuples in the offset table is given by headers()['TOC size'].
+Entries in the table whose function is unknown have the key `Offset n` where n is the identifying number (other than 0-2 and 10-11). These numbers do not necessarily appear in the file in ascending order, although entries 0-2 always do. The number of tuples in the offset table is given by `headers()['TOC size']`.
 
 === `rawtoc(formatted=0)` ===
 
