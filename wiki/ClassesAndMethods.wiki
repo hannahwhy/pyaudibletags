@@ -153,9 +153,9 @@ for root, dirs, files in os.walk(r"F:\My Audiobooks"):
     for name in files: 
         if not name.endswith(".aa"): 
             continue 
-    fullname = os.path.join(root,name) 
-    aa = aafile(fullname) 
-    print name, aa.author[0], aa.title
+        fullname = os.path.join(root,name) 
+        aa = aafile(fullname) 
+        print name, aa.author[0], aa.title
 }}}
 
 = Example: Low-level Interface using `tags()` =
@@ -167,9 +167,9 @@ for root, dirs, files in os.walk(r"F:\My Audiobooks"):
     for name in files: 
         if not name.endswith(".aa"): 
             continue 
-    fullname = os.path.join(root,name) 
-    aa = aafile(fullname) 
-    print name 
-    for k,v in aa.tags().items(): 
-        print "%-32s%r" % (k, v) 
+        fullname = os.path.join(root,name) 
+        aa = aafile(fullname) 
+        print name 
+        for k,v in aa.tags().items(): 
+            print "%-32s%r" % (k, v) 
 }}}
