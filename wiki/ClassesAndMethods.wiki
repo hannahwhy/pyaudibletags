@@ -147,6 +147,7 @@ Returns all of the metadata retrieved from the file header in a single dictionar
 = Example: High-level Interface using attributes =
 
 {{{
+import os
 import os.path 
 from pyaudibletags import aafile 
 for root, dirs, files in os.walk(r"F:\My Audiobooks"): 
@@ -161,6 +162,7 @@ for root, dirs, files in os.walk(r"F:\My Audiobooks"):
 = Example: Low-level Interface using `tags()` =
 
 {{{
+import os
 import os.path 
 from pyaudibletags import aafile 
 for root, dirs, files in os.walk(r"F:\My Audiobooks"): 
