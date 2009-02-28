@@ -1,4 +1,4 @@
-# Instructions for using the program as Python source
+Instructions for using the program as Python source
 
 = Introduction =
 
@@ -6,7 +6,4 @@ If you know and use Python you will probably want to run the Python source progr
 
 = Running the Program =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Invoke the program as in this example: `python organizaa.py "F:\My Audiobooks"`
