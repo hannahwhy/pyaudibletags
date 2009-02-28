@@ -16,7 +16,7 @@ Organizaa is a _command-line program_. It won't work if you just double-click on
 
 If you are comfortable using command-line programs this will be all you need:
 
-Invoke as in this example: `organizeaa "F:\My Audio Books"`
+Invoke as in this example: `organizaa "F:\My Audio Books"`
 
 == Step-by-Step Instructions ==
 
