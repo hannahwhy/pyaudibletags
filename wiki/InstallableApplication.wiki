@@ -1,0 +1,39 @@
+Instructions for using the program as an installable application
+
+= Introduction =
+
+If you're not interested in programmatic access to the tags inside an `.aa` file, and just want a program that will organize your audiobooks for you, then you should download the setup program from the Downloads tab.
+
+= Installing the Program =
+
+Run `setup.exe`. If you have installed any other program you will find it straightforward to use.
+
+= Running the Program =
+
+Organizaa is a _command-line program_. It won't work if you just double-click on it, because you have to tell it what folder you want organized.
+
+1. Open a Windows console as follows: select `Start | Run...` and when prompted `Open:` type `cmd` and press OK.
+
+2. You will now have a Windows console session (also inaccurately called a "DOS box").
+
+3. Type `cd` at the prompt, and then a space, but don't press Enter.
+
+4. Find the folder where you installed Organizaa. Then drag the folder name from Explorer to the Windows console session. Windows will type the complete folder name for you.
+
+5. Your command line should look like this:
+{{{
+cd "C:\Program Files\Rocket Cottage\Organizaa"
+}}}
+Press Enter.
+
+6. Now type `organizaa` at the prompt, and then a space, but don't press Enter.
+
+7. Find the audiobook folder that you want to reorganize and drag the folder name from Explorer to the Windows console session. Windows will type the complete folder name for you. 
+
+8. Your command line should look like this:
+{{{
+organizaa "C:\My Audio Books"
+}}}
+Press Enter.
+
+After a few moments the program will report the number of files it has moved. You're done.
