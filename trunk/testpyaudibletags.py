@@ -1,3 +1,4 @@
+# $Id$
 #Sample usage:
 import os.path
 from pyaudibletags import aafile

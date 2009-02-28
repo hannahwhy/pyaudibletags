@@ -1,4 +1,4 @@
-# $Id$
+# $Id: organizaa.py 726 2009-02-28 15:46:08Z  $
 # Program to go through a subtree of audiobooks in Audible .aa format, and reorganize the subtree
 # with one folder per author and one subfolder per title (which will contain only one .aa file if
 # the audiobook comes in a single part.
