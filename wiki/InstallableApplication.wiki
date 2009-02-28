@@ -10,7 +10,15 @@ Run `setup.exe`. If you have installed any other program you will find it straig
 
 = Running the Program =
 
-Organizaa is a _command-line program_. It won't work if you just double-click on it, because you have to tell it what folder you want organized.
+Organizaa is a _command-line program_. It won't work if you just double-click on it, because you have to tell it what folder you want organized. 
+
+== Quick Instructions ==
+
+If you are comfortable using command-line programs this will be all you need:
+
+Invoke as in this example: `organizeaa "F:\My Audio Files"`
+
+== Step-by-Step Instructions ==
 
 1. Open a Windows console as follows: select `Start | Run...` and when prompted `Open:` type `cmd` and press OK.
 
