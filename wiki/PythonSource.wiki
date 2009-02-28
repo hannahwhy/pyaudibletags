@@ -1,0 +1,12 @@
+# Instructions for using the program as Python source
+
+= Introduction =
+
+If you know and use Python you will probably want to run the Python source program yourself. That will give you the quickest download, 3 little files totalling 20k. These you can get from the Source tab.
+
+= Running the Program =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
