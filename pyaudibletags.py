@@ -200,12 +200,12 @@ class aafile():
     def get_parent_title(self):
 	try:
 	    ptitle = unicode(self.__tags['Content:parent_title'].strip(), 'latin-1', 'replace')
-	except IndexError:
+	except KeyError:
 	    ptitle = None
 	if ptitle:
 	    return ptitle
 	else:
-	    return partindication.sub("", self.title, 1)
+	    return partindication.sub("", self.short_title, 1)
 	    
     def get_keywords(self):
 	try:
@@ -323,6 +323,12 @@ class aafile():
 	    return 0
 	else:
 	    return int(self.title_id[2][-1],36) - 9
+	
+    def get_unabridged(self):
+	return  u"Unabridged" in self.title
+
+    def get_selections(self):
+	return  u"Selections" in self.title
 
     short_title = property(get_short_title, doc="Docstring for attribute short_title")
 
@@ -374,6 +380,10 @@ class aafile():
     
     part_number = property(get_part_number, doc="Return an integer in the range 1-27 indicating the part number of a multipart audiobook; zero if there is only one part")
     
+    unabridged = property(get_unabridged, doc="Return True if the title is an unabridged performance of the original (as specified in the title) or False otherwise")
+    
+    selections = property(get_selections, doc="Return True if the title contains selections from the original work (as specified in the title) or False otherwise")
+
 if __name__ == "__main__":
     aa = aafile(r"F:\Documents\Audio Books\Bernard Cornwell and Susannah Kells\Unknown Album\A Crowning Mercy (Unabridged), Part 1.aa")
     for att in aa.__slots__:
