@@ -16,7 +16,7 @@ How you use the program depends on whether you just want the [InstallableApplica
 
 = Operation =
 
-You must specify a folder to operate on. The program will examine every `.aa` file in the specified subtree, extract the author and title tags, and construct a fresh subtree under `F:\My Audiobooks` with one folder per author, and within that folder, one subfolder per book. This means that short books that consist of only a single file will have a folder all to themselves with one file in it.
+You must specify a folder to operate on. The program will examine every `.aa` file in the specified subtree, extract the author and title tags, and construct a fresh subtree, in place, with one folder per author, and within that folder, one subfolder per book. This means that short books that consist of only a single file will have a folder all to themselves with one file in it.
 
 The program tries to be reasonably sensible about creating short, useful folder names.
 
