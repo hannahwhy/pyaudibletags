@@ -45,3 +45,21 @@ organizaa "C:\My Audio Books"
 Press Enter.
 
 After a few moments the program will report the number of files it has moved. You're done.
+
+== Creating a Shortcut ==
+
+If you are going to want to do this regularly, create a shortcut to run the progam.
+
+1. In Explorer, open the folder where you installed Organizaa and right-click-drag organizaa.exe to the desktop (or somewhere else you find convenient).
+
+2. When you drop the file on the desktop, take the option _Create shortcut here_. It will be called _Shortcut to organizaa.exe_.
+
+3. Right-click the shortcut and select _Properties_. On the Shortcut tab, edit the Target field by adding the name of your audiobook folder. Like this:
+
+ - Before: `"C:\Program Files\Rocket Cottage\Organizaa\organizaa.exe"`
+
+ - After:  `"C:\Program Files\Rocket Cottage\Organizaa\organizaa.exe" "F:\My Audiobooks"`
+
+4. If you want, on the General tab, change the name from `Shortcut to...` to something more convenient.
+
+5. Press OK. Now double-click the shortcut to run the program.
