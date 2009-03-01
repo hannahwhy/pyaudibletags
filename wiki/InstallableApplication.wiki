@@ -6,7 +6,7 @@ If you're not interested in programmatic access to the tags inside an `.aa` file
 
 = Installing the Program =
 
-Run `setup.exe`. If you have installed any other program you will find it straightforward to use.
+Run `setup-1.x.x.exe`. If you have installed any other program you will find this installer straightforward to use.
 
 = Running the Program =
 
