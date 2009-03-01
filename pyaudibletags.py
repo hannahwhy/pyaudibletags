@@ -158,7 +158,7 @@ class aafile():
             p += q
 
         if len(tags) != expected_tags:
-            raise RuntimeError, 'Expecting %d tags from header, got %d' % (expected_tags, len(tags))
+            raise IOError, 'Expecting %d tags from header, got %d' % (expected_tags, len(tags))
         return tags
     
     def __nullcheck(self, key, default=None):
