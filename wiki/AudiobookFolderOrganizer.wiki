@@ -25,3 +25,5 @@ If there is more than one author, then only the first author appears in the name
 The program treats any non-ascii character that it finds in the author and title tags as being encoded using latin-1 (essentially the Windows character set). This may give unexpected results if you are working with a filesystem (such as a portable drive) that encodes characters in the range 128-255 differently.
 
 If in the process of moving files from one folder to another, a folder is left empty, then that folder will be silently removed. The program will _never_ delete files or non-empty folders.
+
+After you have done this, Audible Manager and iTunes will say that they can no longer locate the files. To access them from these programs, you will need to delete the library entries and add them back again. *_Under Audible Manager this is an extremely tedious process._*
